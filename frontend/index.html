@@ -9,7 +9,7 @@
     <title>Crud</title>
 </head>
 <body>
-<a href="{% url 'post' %}">
+<a href="{% url 'add' %}">
   <button class="btn btn-primary">yaratish</button>
 </a>
     <table class="table">
@@ -41,7 +41,7 @@
              
             </td>
             <td>
-              <a href="/update/{{posts.id}}">
+              <a href="/edit/{{posts.id}}">
                 <i class="fa fa-edit" style="font-size:18px;color:rgb(16, 13, 247)"></i>
               </a>
             </td>

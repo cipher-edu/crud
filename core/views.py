@@ -21,18 +21,7 @@ def delete(request, id):
     delete_post.delete()
     return redirect('home')
 
-def update(request, id):
-    update_post = Company.objects.get(id=id)
-    return render(request, 'update.html',{'update_post':update_post})
+def edit(request, id):
+    post = Company.objects.get(id=id)
 
-def updaterecord(request, id):
-    name = request.POST['name']
-    about = request.POST['about']
-    logo = request.POST['logo']
-    updaterecord = Company.objects.get(id=id)
-    updaterecord = name
-    updaterecord = about
-    updaterecord= logo
-    updaterecord.save()
-
-    return redirect('home')
+    return render(request, 'update.html', {'post':post})
