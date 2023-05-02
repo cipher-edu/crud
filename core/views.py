@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, reverse
 from  django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView
@@ -12,8 +13,22 @@ class SingupView(CreateView):
         return reverse('home')
 # @login_required
 def home(request):
-    post = Company.objects.all()
-    return render(request, 'index.html', {'post':post})
+    post_list = Company.objects.all()
+    paginator = Paginator(post_list, 1) # Show 10 posts per page
+    page = request.GET.get('page')
+    try:
+        post = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        post = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        post = paginator.page(paginator.num_pages)
+    context = {
+        'post_list':post_list,
+        'post':post
+    }
+    return render(request, 'index.html',context=context)
 
 def add(request):
     form = CompanyForm(request.POST)
