@@ -7,6 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-
+<form action="editpost/{{post.id}}" method="POST">
+    {% csrf_token %}
+    <input type="text" name="name" id="" value="{{post.name}}">
+    <input type="text" name="about" value="{{post.about}}">
+    <button type="submit">Save</button>
+</form>
 </body>
 </html>
